@@ -1,0 +1,160 @@
+---
+title: "Assignment No. 1"
+author: "Barun Kumar (18125760015)"
+date: "30 November 2018"
+output: html_document
+---
+SINGLE FUNCTION FOR TIME VALUE OF MONEY CALCULATIONS
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Function Definition
+
+```{r}
+cal_value <- function(a,b,r,n,t,meth){
+  
+# Calculation for Future and Present Value  
+  if(meth == "FVPV"){
+    
+    if(a == "cal"){
+      reff = r/(t*100)
+      neff = n*t
+      print("Future Value : ")
+      return(b*((1+reff)^neff))
+    }
+    else if(b == "cal"){
+      reff = r/(t*100)
+      neff = n*t
+      print("Present Value : ")
+      return(a/((1+reff)^neff))
+    }
+    else if(r == "cal"){
+      neff = n*t
+      print("Annual rate of interest : ")
+      return(((a/b)^(1/neff)-1)*t*100)
+    }
+    else if(n == "cal"){
+      reff = r/(t*100)
+      print("Period Value (in years) : ")
+      return((log(a/b)/log(1+reff))/t)
+    }
+  }
+  
+# Calculation for Future Value of an annuity
+  if(meth == "FVA"){
+    if(a == "cal"){
+      reff = r/(t*100)
+      neff = n*t 
+      print("Future Value of annuity : ")
+      return(b*(((1+reff)^neff)-1)/reff)
+    }
+    else if(b == "cal"){
+      reff = r/(t*100)
+      neff = n*t 
+      print("Constant Periodic Flow : ")
+      return(a*reff/(((1+reff)^neff)-1))
+    }
+    else if(n == "cal"){
+      reff = r/(t*100)
+      print("Period Value (in years) : ")
+      return(((log(((a*reff)/b)+1))/(log(1+reff)))/t)
+    }
+  }
+  # Calculation for Present Value of an annuity
+    if(meth == "PVA"){
+    if(a == "cal"){
+      reff = r/(t*100)
+      neff = n*t 
+      print("Present Value of annuity : ")
+      return(b*(1-((1+reff)^(-neff)))/reff)
+    }
+    else if(b == "cal"){
+      reff = r/(t*100)
+      neff = n*t 
+      print("Constant Periodic Flow : ")
+      return(a*reff/(1-((1+reff)^(-neff))))
+    }
+    else if(n == "cal"){
+      reff = r/(t*100)
+      print("Period Value (in years) : ")
+      return(-((log(1-((a*reff)/b)))/(log(1+reff)))/t)
+    }
+  }
+}
+```
+
+*************************************************************************
+
+FUTURE VALUE AND PRESENT VALUE
+
+*************************************************************************
+ a    = Future value
+ b    = Present value
+ r    = annual rate of interest
+ n    = Number of years
+ t    = Number of periods in a year
+ meth = "FVPV" (FUTURE VALUE AND PRESENT VALUE calculation method)
+
+Put "cal" in any variable whose value needs to be found in below function 
+call and execute to get the solution
+
+-------------------------------------------------------------------------
+
+```{r}
+
+cal_value(7449.229,5000,"cal",5,12,"FVPV")
+
+```
+******************************************************************************
+********************************************************************************
+FUTURE VALUE OF AN ANNUITY
+
+******************************8***********************************************
+ a    : Future value of an annuity
+ b    : Constant periodic flow(A)
+ r    : annual rate of interest
+ n    : Number of years
+ t    : Number of periods in a year
+ meth : "FVPV" (FUTURE VALUE AND PRESENT VALUE calculation method)
+
+Put "cal" in any variable whose value needs to be found in below function 
+call and execute to get the solution
+
+> Calculating r is complex so this function will not work for r calculation
+
+-----------------------------------------------------------------------------
+```{r}
+
+cal_value("cal",500,12,5,4,"FVA")
+
+```
+
+-----------------------------------------------------------------------------
+
+********************************************************************************
+PRESENT  VALUE OF AN ANNUITY
+********************************************************************************
+ a    : Present value of an annuity
+ b    : Constant periodic flow(A)
+ r    : annual rate of interest
+ n    : Number of years
+ t    : Number of periods in a year
+ meth : "FVPV" (FUTURE VALUE AND PRESENT VALUE calculation method)
+
+
+Put "cal" in any variable whose value needs to be found in below function 
+call and execute to get the solution
+
+> Calculating r is complex so this function will not work for r calculation
+
+-----------------------------------------------------------------------------
+
+```{r}
+
+cal_value(8175.717,500,8,"cal",4,"PVA")
+
+```
+
+-----------------------------------------------------------------------------
