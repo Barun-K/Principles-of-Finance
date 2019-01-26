@@ -1,0 +1,131 @@
+---
+title: "ASSIGNMENT NO.: 1"
+author: "Barun Kumar (18125760015)"
+date: "27 November 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+*************************************************************************************
+1. Using R Programming create User Defined Functions for the below formulae:
+-------------------------------------------------------------------------------------
+r, n, t parameters are used in all functions have meaning as mentioned below :
+
+# r    = annual rate of interest
+# n    = Number of years
+# t    = Number of periods in a year
+
+_________________________________________________________________________________
+
+A. Future value = Present value(1+r)^n
+_________________________________________________________________________________
+
+Solution :
+```{r}
+cal_future_value <- function(pv,r,n,t){
+  reff = r/(t*100)
+  neff = n*t
+  print("Future Value : ")
+  return(pv*((1+reff)^neff))
+}
+```
+
+Example :
+
+```{r}
+
+cal_future_value(1000,10,10,12)
+
+```
+_________________________________________________________________________________
+
+B. Future value of an annuity = Constant periodic flow(A) [(1+r)^n - 1)/r]
+_________________________________________________________________________________
+```{r}
+
+cal_future_value_annuity <- function(A,r,n,t){
+  reff = r/(t*100)
+  neff = n*t
+  print("Future Value of annuity : ")
+  return(A*(((1+reff)^neff)-1)/reff)
+}
+
+```
+
+Example :
+
+```{r}
+
+cal_future_value_annuity(1000,8,5,4)
+
+```
+_________________________________________________________________________________
+
+C. Present value = Future value x 1/(1+r)^n
+_________________________________________________________________________________
+```{r}
+
+cal_present_value <- function(FV,r,n,t){
+  reff = r/(t*100)
+  neff = -n*t
+  print("Present Value : ")
+  return(FV*((1+reff)^neff))
+}
+
+```
+
+Example :
+
+```{r}
+
+cal_present_value(1000,10,5,4)
+
+```
+
+_________________________________________________________________________________
+
+D. Present value of an annuity = Constant periodic flow(A) [1 - 1/ (1+r)^n] /r
+_________________________________________________________________________________
+```{r}
+
+cal_present_value_annuity <- function(A,r,n,t){
+  reff = r/(t*100)
+  neff = -n*t
+  print("Present Value of annuity : ")
+  return(A*((1-((1+reff)^(neff)))/reff))
+}
+
+```
+
+Example :
+
+```{r}
+
+cal_present_value_annuity(1000,8,5,12)
+
+```
+_________________________________________________________________________________
+
+E. Present value of a perpetuity = Constant periodic flow(A) [1/r]
+_________________________________________________________________________________
+```{r}
+
+cal_present_value_perpetuity <- function(A,r){
+  print("Present Value of perpetuity : ")
+  return(A/r)
+}
+
+```
+
+Example :
+
+```{r}
+
+cal_present_value_perpetuity(15000,8)
+
+```
+
+
+
